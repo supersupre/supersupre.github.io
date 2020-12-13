@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Why I like &quot;git rebase&quot; | 超哥的个人博客</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="rebase is more intuitive and clean than merge. So stop always using merge to combine branches.">
+    
+    <link rel="preload" href="/assets/css/0.styles.db139f22.css" as="style"><link rel="preload" href="/assets/js/app.5e01ec81.js" as="script"><link rel="preload" href="/assets/js/8.46b4a70d.js" as="script"><link rel="preload" href="/assets/js/18.7c0a5126.js" as="script"><link rel="preload" href="/assets/js/6.033b1b9c.js" as="script"><link rel="prefetch" href="/assets/js/10.35d669ec.js"><link rel="prefetch" href="/assets/js/11.ff02f680.js"><link rel="prefetch" href="/assets/js/12.bcbe4afb.js"><link rel="prefetch" href="/assets/js/13.df830664.js"><link rel="prefetch" href="/assets/js/14.b96f69c3.js"><link rel="prefetch" href="/assets/js/15.6d769794.js"><link rel="prefetch" href="/assets/js/16.d8eabf7b.js"><link rel="prefetch" href="/assets/js/17.809e07fe.js"><link rel="prefetch" href="/assets/js/19.20bc506a.js"><link rel="prefetch" href="/assets/js/20.018b849d.js"><link rel="prefetch" href="/assets/js/21.5f5caae3.js"><link rel="prefetch" href="/assets/js/22.54cc0433.js"><link rel="prefetch" href="/assets/js/23.f676f562.js"><link rel="prefetch" href="/assets/js/24.7f3668a9.js"><link rel="prefetch" href="/assets/js/25.b3943d8f.js"><link rel="prefetch" href="/assets/js/3.4013fd1f.js"><link rel="prefetch" href="/assets/js/4.558b27d0.js"><link rel="prefetch" href="/assets/js/5.8dc51427.js"><link rel="prefetch" href="/assets/js/7.ee391bd7.js"><link rel="prefetch" href="/assets/js/9.62902d60.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.7d488c9c.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.db139f22.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-blog__global-layout"><section id="header-wrapper"><header id="header"><div class="header-wrapper"><div class="title"><a href="/" class="nav-link home-link">超哥的个人博客 </a></div> <div class="header-right-wrap"><ul class="nav"><li class="nav-item"><a href="/" class="nav-link">博客</a></li><li class="nav-item"><a href="/tag/" class="nav-link">标签</a></li></ul> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></div></header></section> <div id="mobile-header"><div class="mobile-header-bar"><div class="mobile-header-title"><a href="/" class="nav-link mobile-home-link">超哥的个人博客 </a> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div> <div class="mobile-menu-wrapper"><hr class="menu-divider"> <ul class="mobile-nav"><li class="mobile-nav-item"><a href="/" class="nav-link">博客</a></li><li class="mobile-nav-item"><a href="/tag/" class="nav-link">标签</a></li> <li class="mobile-nav-item"><!----></li></ul></div></div></div> <div class="content-wrapper"><div><div class="content__default"><p><a href="/zh/2019/08/15/why-I-like-git-rebase/">繁體中文</a> | English</p> <p>Please take a look at <a href="https://git-scm.com/docs/git-rebase" target="_blank" rel="noopener noreferrer">documentation<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> if you've never used <code>git rebase</code> before.</p> <p>I'm going to share the reason or timing I use <code>git rebase</code> and <code>git push --force-with-lease</code>. I feel like there's still many people don't know there's a useful stuff <code>git push --force-with-lease</code>. In my opinion, we should always use <code>git push --force-with-lease</code> with <code>git rebase</code>.</p> <h2 id="why-i-like-git-rebase"><a href="#why-i-like-git-rebase" class="header-anchor">#</a> Why I like <code>git rebase</code></h2> <h3 id="commit-history-is-clear-and-straightforward"><a href="#commit-history-is-clear-and-straightforward" class="header-anchor">#</a> Commit history is clear and straightforward</h3> <p>Both <code>merge</code> and <code>rebase</code> can join two branches together, Let's take a look the difference：</p> <p><code>merge</code> will put all commits of two branches together and sort them by commit time, It's just like Dragon Ball Fusion:
+<img src="/assets/img/dragon-ball.97400da0.gif" alt="Dragon Ball"></p> <p><code>rebase</code> don't care about commit time. It keep every commit which comes from the same branch together. It's like the fusion in One Piece:
+<img src="/assets/img/one-piece.c5066dc0.gif" alt="One Piece"></p> <p>See the difference? Even though the fusion is completed, I can still recognize each part 👍.</p> <h3 id="the-way-to-solve-conflicts"><a href="#the-way-to-solve-conflicts" class="header-anchor">#</a> The way to solve conflicts</h3> <p><code>merge</code> has to generate a merge commit, maybe it can be <a href="https://git-scm.com/docs/git-merge#_fast_forward_merge" target="_blank" rel="noopener noreferrer">fast-forward<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>, but when there're conflicts, you have to solve it and commit your changes.</p> <p>On the other hand, <code>rebase</code> won't generate any lengthy commit 👍.</p> <p><code>rebase</code> is actually like rebuilding the base and submit all the commits again. Whenever meeting conflicts, it'll stop to let you solve it. I personally prefer this approach since it's more clear to figure out which changes I want to keep or drop. But it's not really handy when there's a lot of commits and they all meet conflicts.</p> <p>To be honest, I use them both. Merge commits help me track the merges. I usually use <code>rebase</code> to solve conflicts in my feature branch and only use <code>merge</code> when I'm going to merge a feature branch to master.</p> <p>Take a look at difference, only <code>merge</code>:</p> <p><img src="/assets/img/merge.4277e726.png" alt="merge history"></p> <p><code>rebase</code> + <code>merge</code>:</p> <p><img src="/assets/img/rebase.b13347be.png" alt="rebase history"></p> <h3 id="feel-free-to-edit-commits"><a href="#feel-free-to-edit-commits" class="header-anchor">#</a> Feel free to edit commits</h3> <p>It's no longer to do with joining branches together, I've mentioned something like <code>submit all the commits again</code>, since it's going to commit again, of course you can edit the commits.</p> <p><a href="https://git-scm.com/docs/git-rebase#_interactive_mode" target="_blank" rel="noopener noreferrer">git rebase -i<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>It'll probably show something like below:</p> <div class="language- extra-class"><pre class="language-text"><code>pick 30e43f8 docs: update Readme
+pick 4103b7e feat: add Z feature
+pick b962eeb feat: add A feature
+pick f296540 feat: add B feature
+pick a49b581 feat: add D feature
+pick 0967d97 feat: add E feature
+
+# Rebase dc2a5e0..0967d97 onto dc2a5e0 (6 commands)
+#
+# Commands:
+# p, pick &lt;commit&gt; = use commit
+# r, reword &lt;commit&gt; = use commit, but edit the commit message
+# e, edit &lt;commit&gt; = use commit, but stop for amending
+# s, squash &lt;commit&gt; = use commit, but meld into previous commit
+# f, fixup &lt;commit&gt; = like &quot;squash&quot;, but discard this commit's log message
+# x, exec &lt;command&gt; = run command (the rest of the line) using shell
+# b, break = stop here (continue rebase later with 'git rebase --continue')
+# d, drop &lt;commit&gt; = remove commit
+# l, label &lt;label&gt; = label current HEAD with a name
+# t, reset &lt;label&gt; = reset HEAD to a label
+# m, merge [-C &lt;commit&gt; | -c &lt;commit&gt;] &lt;label&gt; [# &lt;oneline&gt;]
+# .       create a merge commit using the original merge commit's
+# .       message (or the oneline, if no original merge commit was
+# .       specified). Use -c &lt;commit&gt; to reword the commit message.
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+</code></pre></div><p>You're able to reorder, edit commit message, remove commit, or even meld some commits into a previous commit, etc. Well, it's pretty handy,</p> <h2 id="git-push-force-with-lease"><a href="#git-push-force-with-lease" class="header-anchor">#</a> <code>git push --force-with-lease</code></h2> <h3 id="usage"><a href="#usage" class="header-anchor">#</a> Usage</h3> <p><code>rebase</code> is really useful, but it means you change the history. We don't care about that if the branch is just a local branch. But if you have pushed it to the remote repository, you have to run <code>git push -f</code> which is very dangerous.</p> <p>Thus, I always use <code>git push --force-with-lease</code>.</p> <blockquote><p>This option allows you to say that you expect the history you are updating is what you rebased and want to replace. If the remote ref still points at the commit you specified, you can be sure that no other people did anything to the ref.</p></blockquote> <p>If the history isn't what we expected:</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">git</span> push origin master --force-with-lease
+To github.com:newsbielt703/test-git-push--force-with-lease.git
+ <span class="token operator">!</span> <span class="token punctuation">[</span>rejected<span class="token punctuation">]</span>        master -<span class="token operator">&gt;</span> master <span class="token punctuation">(</span>stale info<span class="token punctuation">)</span>
+error: failed to push some refs to <span class="token string">'git@github.com:newsbielt703/test-git-push--force-with-lease.git'</span>
+</code></pre></div><h3 id="bad-things-happened"><a href="#bad-things-happened" class="header-anchor">#</a> Bad things happened</h3> <p>What if you screw up, maybe you have just run <code>git push -f</code> and someone lost his/her work? No worries. I found something interesting - <a href="https:/github.com/jayphelps/git-blame-someone-else" target="_blank" rel="noopener noreferrer">git-blame-someone-else<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>. Install it and run <code>git blame-someone-else &quot;yourteammate &lt;yourteamate@gmail.com&gt;&quot; &lt;commit&gt;</code>. See what happen below, it's no longer your fault:</p> <div class="language- extra-class"><pre class="language-text"><code>commit 70f45487814217d0226f7eae8d0caa0734775353 (HEAD -&gt; master, origin/master)
+Author: yourteammate &lt;yourteammate@gmail.com&gt;
+Date:   Thu Aug 15 20:57:00 2019 +0800
+
+    feat: add E feature
+
+commit a202ae4447adebe5bfe3e73e678665a8bfdf6f0f
+Author: yourteammate &lt;yourteammate@gmail.com&gt;
+Date:   Thu Aug 15 20:56:43 2019 +0800
+
+    feat: add D feature
+
+commit be908366c98052077d893dedc28baf92dffacb71
+Author: yourteammate &lt;yourteammate@gmail.com&gt;
+Date:   Thu Aug 15 20:41:02 2019 +0800
+
+    feat: add B feature
+
+commit 10e6a57d3061abc55798f815a790bba6307039e5
+Author: yourteammate &lt;yourteammate@gmail.com&gt;
+Date:   Thu Aug 15 20:40:47 2019 +0800
+
+    feat: add A feature
+
+commit 4103b7ed93993635b2b7ac35ec2ceab79a7d6446
+Author: Billyyyyy3320 &lt;newsbielt703@gmail.com&gt;
+Date:   Thu Aug 15 20:52:04 2019 +0800
+
+    feat: add Z feature
+
+commit 30e43f858ef692b26380cceda5a84ac8a6c6e3d5
+Author: Billyyyyy3320 &lt;newsbielt703@gmail.com&gt;
+Date:   Thu Aug 15 20:47:59 2019 +0800
+
+    docs: update Readme
+
+commit dc2a5e0c60991925dd7fa4858ff367534000b380
+Author: Billyyyyy3320 &lt;newsbielt703@gmail.com&gt;
+Date:   Thu Aug 15 20:37:19 2019 +0800
+
+    feat: init
+</code></pre></div><p>It's just joking, please don't do that!<br>
+It's just joking, please don't do that!<br>
+It's just joking, please don't do that!</p> <blockquote><p>This changes not only who authored the commit but the listed commiter as well. It also is something I wrote as a joke, so please don't run this against your production repo and complain if this script deletes everything.</p></blockquote> <hr> <p>End.</p></div></div></div> <footer class="footer" data-v-fdbf4940><div class="footer-left-wrap" data-v-fdbf4940><ul class="contact" data-v-fdbf4940><li class="contact-item" data-v-fdbf4940><a href="http://yaufo.com" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-fdbf4940><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe" data-v-fdbf4940><circle cx="12" cy="12" r="10" data-v-fdbf4940></circle><line x1="2" y1="12" x2="22" y2="12" data-v-fdbf4940></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" data-v-fdbf4940></path></svg>
+          
+        </a></li></ul></div> <div class="footer-right-wrap" data-v-fdbf4940><ul class="copyright" data-v-fdbf4940><li class="copyright-item" data-v-fdbf4940><a href="/_en/.html" class="nav-link" data-v-fdbf4940>caiyuchao © 2019-present</a></li></ul></div></footer></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.5e01ec81.js" defer></script><script src="/assets/js/8.46b4a70d.js" defer></script><script src="/assets/js/18.7c0a5126.js" defer></script><script src="/assets/js/6.033b1b9c.js" defer></script>
+  </body>
+</html>

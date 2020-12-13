@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>测试博客使用 | 超哥的个人博客</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="rebase比merge更直觀更乾淨，別再只用merge來分別分支了。">
+    
+    <link rel="preload" href="/assets/css/0.styles.db139f22.css" as="style"><link rel="preload" href="/assets/js/app.5e01ec81.js" as="script"><link rel="preload" href="/assets/js/8.46b4a70d.js" as="script"><link rel="preload" href="/assets/js/3.4013fd1f.js" as="script"><link rel="preload" href="/assets/js/7.ee391bd7.js" as="script"><link rel="prefetch" href="/assets/js/10.35d669ec.js"><link rel="prefetch" href="/assets/js/11.ff02f680.js"><link rel="prefetch" href="/assets/js/12.bcbe4afb.js"><link rel="prefetch" href="/assets/js/13.df830664.js"><link rel="prefetch" href="/assets/js/14.b96f69c3.js"><link rel="prefetch" href="/assets/js/15.6d769794.js"><link rel="prefetch" href="/assets/js/16.d8eabf7b.js"><link rel="prefetch" href="/assets/js/17.809e07fe.js"><link rel="prefetch" href="/assets/js/18.7c0a5126.js"><link rel="prefetch" href="/assets/js/19.20bc506a.js"><link rel="prefetch" href="/assets/js/20.018b849d.js"><link rel="prefetch" href="/assets/js/21.5f5caae3.js"><link rel="prefetch" href="/assets/js/22.54cc0433.js"><link rel="prefetch" href="/assets/js/23.f676f562.js"><link rel="prefetch" href="/assets/js/24.7f3668a9.js"><link rel="prefetch" href="/assets/js/25.b3943d8f.js"><link rel="prefetch" href="/assets/js/4.558b27d0.js"><link rel="prefetch" href="/assets/js/5.8dc51427.js"><link rel="prefetch" href="/assets/js/6.033b1b9c.js"><link rel="prefetch" href="/assets/js/9.62902d60.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.7d488c9c.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.db139f22.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-blog__global-layout"><section id="header-wrapper"><header id="header"><div class="header-wrapper"><div class="title"><a href="/" class="nav-link home-link">超哥的个人博客 </a></div> <div class="header-right-wrap"><ul class="nav"><li class="nav-item"><a href="/" class="nav-link">博客</a></li><li class="nav-item"><a href="/tag/" class="nav-link">标签</a></li></ul> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></div></header></section> <div id="mobile-header"><div class="mobile-header-bar"><div class="mobile-header-title"><a href="/" class="nav-link mobile-home-link">超哥的个人博客 </a> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div> <div class="mobile-menu-wrapper"><hr class="menu-divider"> <ul class="mobile-nav"><li class="mobile-nav-item"><a href="/" class="nav-link">博客</a></li><li class="mobile-nav-item"><a href="/tag/" class="nav-link">标签</a></li> <li class="mobile-nav-item"><!----></li></ul></div></div></div> <div class="content-wrapper"><div id="vuepress-theme-blog__post-layout"><article itemscope="itemscope" itemtype="https://schema.org/BlogPosting" class="vuepress-blog-theme-content"><header><h1 itemprop="name headline" class="post-title">
+        测试博客使用
+      </h1> <div class="post-meta"><!----> <div class="post-meta-date"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <time pubdate itemprop="datePublished" datetime="2020-12-13T00:00:00.000Z">
+      2020 12 13
+    </time></div> <ul itemprop="keywords" class="post-meta-tags"><li class="post-tag" data-v-42ccfcd5><a href="/tag/Git" data-v-42ccfcd5><span data-v-42ccfcd5>Git</span></a></li></ul></div></header> <div itemprop="articleBody" class="content__default"><p>繁體中文 | <a href="/en/2019/08/15/why-I-like-git-rebase/">English</a></p> <p>這篇文章是要分享我使用的原因與時機還有似乎很多人不知道的<code>git push --force-with-lease</code>。已經很多文章在講<code>git rebase</code>了，但很多都沒有提到應該要跟<code>git push --force-with-lease</code>一起使用。</p> <p>在開始之前，如果你重來沒用過<code>rebase</code>，<a href="https://git-scm.com/docs/git-rebase" target="_blank" rel="noopener noreferrer">請服用<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>。</p> <h2 id="為什麼我愛用git-rebase"><a href="#為什麼我愛用git-rebase" class="header-anchor">#</a> 為什麼我愛用<code>git rebase</code></h2> <h3 id="專案的歷史非常整潔直觀"><a href="#專案的歷史非常整潔直觀" class="header-anchor">#</a> 專案的歷史非常整潔直觀</h3> <p><code>merge</code>跟<code>rebase</code>都可以合併分支，那來看看他們的差別：</p> <p><code>merge</code>會把兩個分支的 commits 一樣照時間排序摻在一塊，合併為一個分支，就像七龍珠合體，合體完都摻在一起了：
+<img src="/assets/img/dragon-ball.97400da0.gif" alt="Dragon Ball"></p> <p><code>rebase</code>則是重定基底，兩個分支的 commits 時間我不管，但是同個分支內的 commits 都放在一起，就像海賊王合體一樣，就算合體完成我還是一看就知道是由什麼組成，因為來自哪裡都擺在一塊 👍：
+<img src="/assets/img/one-piece.c5066dc0.gif" alt="One Piece"></p> <h3 id="解決衝突的方式"><a href="#解決衝突的方式" class="header-anchor">#</a> 解決衝突的方式</h3> <p><code>merge</code>會產生一個 merge commit，沒有衝突的情況可以 <a href="https://git-scm.com/docs/git-merge#_fast_forward_merge" target="_blank" rel="noopener noreferrer">fast-forward<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>，但遇到衝突，就一定得要提交一個 commit 來解決衝突。</p> <p>而<code>rebase</code>不會產生任何多餘的 commit 👍。</p> <p><code>rebase</code>實際上像是重定完基底後，把 commit 一個個重新提交，而遇到衝突就停下讓你解決，這樣的解衝突方法我個人滿喜歡的，一步一步的解思緒比較清楚，方便釐清當前正在做什麼，要留什麼，不留什麼。但是也有壞處，當衝突過多，要解很久，很繁瑣。</p> <p>實際上我兩個都還是會用到，merge commit 可以幫助追蹤。所以我會在自己工作的分支上總是使用<code>rebase</code>來解衝突，而當要把分支併入主分支時使用<code>merge</code>。</p> <p>稍微看一下差異，全都用<code>merge</code>：</p> <p><img src="/assets/img/merge.4277e726.png" alt="merge history"></p> <p><code>rebase</code> + <code>merge</code>：</p> <p><img src="/assets/img/rebase.b13347be.png" alt="rebase history"></p> <h3 id="自由修改所有-commits"><a href="#自由修改所有-commits" class="header-anchor">#</a> 自由修改所有 commits</h3> <p>這就跟合併分支無關，上面提到<code>rebase</code>把 commit 一個個重新提交，那既然可以重新提交，當然也可重新修改 commit 內容吧：</p> <p><a href="https://git-scm.com/docs/git-rebase#_interactive_mode" target="_blank" rel="noopener noreferrer">git rebase -i<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>大概會顯示以下這種畫面：</p> <div class="language- extra-class"><pre class="language-text"><code>pick 30e43f8 docs: update Readme
+pick 4103b7e feat: add Z feature
+pick b962eeb feat: add A feature
+pick f296540 feat: add B feature
+pick a49b581 feat: add D feature
+pick 0967d97 feat: add E feature
+
+# Rebase dc2a5e0..0967d97 onto dc2a5e0 (6 commands)
+#
+# Commands:
+# p, pick &lt;commit&gt; = use commit
+# r, reword &lt;commit&gt; = use commit, but edit the commit message
+# e, edit &lt;commit&gt; = use commit, but stop for amending
+# s, squash &lt;commit&gt; = use commit, but meld into previous commit
+# f, fixup &lt;commit&gt; = like &quot;squash&quot;, but discard this commit's log message
+# x, exec &lt;command&gt; = run command (the rest of the line) using shell
+# b, break = stop here (continue rebase later with 'git rebase --continue')
+# d, drop &lt;commit&gt; = remove commit
+# l, label &lt;label&gt; = label current HEAD with a name
+# t, reset &lt;label&gt; = reset HEAD to a label
+# m, merge [-C &lt;commit&gt; | -c &lt;commit&gt;] &lt;label&gt; [# &lt;oneline&gt;]
+# .       create a merge commit using the original merge commit's
+# .       message (or the oneline, if no original merge commit was
+# .       specified). Use -c &lt;commit&gt; to reword the commit message.
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+</code></pre></div><p>你可以重新排列 commit 順序、修改 commit message、捨棄 commit 甚至融合 commit 等等。
+我個人覺得這超好用。</p> <h2 id="小夥伴-git-push-force-with-lease"><a href="#小夥伴-git-push-force-with-lease" class="header-anchor">#</a> 小夥伴 <code>git push --force-with-lease</code></h2> <h3 id="作用"><a href="#作用" class="header-anchor">#</a> 作用</h3> <p><code>rebase</code> 非常好用但是有它的副作用，rebase 代表修改了歷史，如果只在本地沒有影響，但如果有推到遠端分支，這代表你得<code>git push -f</code>，但全世界都知道<code>git push -f</code>多危險。</p> <p>所以我只用<code>git push --force-with-lease</code>，它會去檢查遠端分支是否有其他人做新的提交，如果不如它預期就會拒絕你 push。</p> <blockquote><p>This option allows you to say that you expect the history you are updating is what you rebased and want to replace. If the remote ref still points at the commit you specified, you can be sure that no other people did anything to the ref.</p></blockquote> <p>被拒絕如下：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">git</span> push origin master --force-with-lease
+To github.com:newsbielt703/test-git-push--force-with-lease.git
+ <span class="token operator">!</span> <span class="token punctuation">[</span>rejected<span class="token punctuation">]</span>        master -<span class="token operator">&gt;</span> master <span class="token punctuation">(</span>stale info<span class="token punctuation">)</span>
+error: failed to push some refs to <span class="token string">'git@github.com:newsbielt703/test-git-push--force-with-lease.git'</span>
+</code></pre></div><h3 id="出事了怎麼辦"><a href="#出事了怎麼辦" class="header-anchor">#</a> 出事了怎麼辦</h3> <p>如果你搞砸了，傻傻地用了<code>git push -f</code>出事了怎麼辦，有個好用的東西<a href="https://github.com/jayphelps/git-blame-someone-else" target="_blank" rel="noopener noreferrer">git-blame-someone-else<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>，安裝完後，照著 Readme 指示執行<code>git blame-someone-else &quot;yourteammate &lt;yourteamate@gmail.com&gt;&quot; &lt;commit&gt;</code>，再看看<code>git log</code>，不是你的錯了：</p> <div class="language- extra-class"><pre class="language-text"><code>commit 70f45487814217d0226f7eae8d0caa0734775353 (HEAD -&gt; master, origin/master)
+Author: yourteammate &lt;yourteammate@gmail.com&gt;
+Date:   Thu Aug 15 20:57:00 2019 +0800
+
+    feat: add E feature
+
+commit a202ae4447adebe5bfe3e73e678665a8bfdf6f0f
+Author: yourteammate &lt;yourteammate@gmail.com&gt;
+Date:   Thu Aug 15 20:56:43 2019 +0800
+
+    feat: add D feature
+
+commit be908366c98052077d893dedc28baf92dffacb71
+Author: yourteammate &lt;yourteammate@gmail.com&gt;
+Date:   Thu Aug 15 20:41:02 2019 +0800
+
+    feat: add B feature
+
+commit 10e6a57d3061abc55798f815a790bba6307039e5
+Author: yourteammate &lt;yourteammate@gmail.com&gt;
+Date:   Thu Aug 15 20:40:47 2019 +0800
+
+    feat: add A feature
+
+commit 4103b7ed93993635b2b7ac35ec2ceab79a7d6446
+Author: Billyyyyy3320 &lt;newsbielt703@gmail.com&gt;
+Date:   Thu Aug 15 20:52:04 2019 +0800
+
+    feat: add Z feature
+
+commit 30e43f858ef692b26380cceda5a84ac8a6c6e3d5
+Author: Billyyyyy3320 &lt;newsbielt703@gmail.com&gt;
+Date:   Thu Aug 15 20:47:59 2019 +0800
+
+    docs: update Readme
+
+commit dc2a5e0c60991925dd7fa4858ff367534000b380
+Author: Billyyyyy3320 &lt;newsbielt703@gmail.com&gt;
+Date:   Thu Aug 15 20:37:19 2019 +0800
+
+    feat: init
+</code></pre></div><p>這段是玩笑，別真的用啊!<br>
+這段是玩笑，別真的用啊!<br>
+這段是玩笑，別真的用啊!</p> <blockquote><p>This changes not only who authored the commit but the listed commiter as well. It also is something I wrote as a joke, so please don't run this against your production repo and complain if this script deletes everything.</p></blockquote> <hr> <p>End.</p></div> <footer><!----> <hr> <!----></footer></article> <div class="sticker vuepress-toc"><div class="vuepress-toc-item vuepress-toc-h2 active"><a href="#為什麼我愛用git-rebase" title="為什麼我愛用git rebase">為什麼我愛用git rebase</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#專案的歷史非常整潔直觀" title="專案的歷史非常整潔直觀">專案的歷史非常整潔直觀</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#解決衝突的方式" title="解決衝突的方式">解決衝突的方式</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#自由修改所有-commits" title="自由修改所有 commits">自由修改所有 commits</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#小夥伴-git-push-force-with-lease" title="小夥伴 git push --force-with-lease">小夥伴 git push --force-with-lease</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#作用" title="作用">作用</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#出事了怎麼辦" title="出事了怎麼辦">出事了怎麼辦</a></div></div></div></div> <footer class="footer" data-v-fdbf4940><div class="footer-left-wrap" data-v-fdbf4940><ul class="contact" data-v-fdbf4940><li class="contact-item" data-v-fdbf4940><a href="http://yaufo.com" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-fdbf4940><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe" data-v-fdbf4940><circle cx="12" cy="12" r="10" data-v-fdbf4940></circle><line x1="2" y1="12" x2="22" y2="12" data-v-fdbf4940></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" data-v-fdbf4940></path></svg>
+          
+        </a></li></ul></div> <div class="footer-right-wrap" data-v-fdbf4940><ul class="copyright" data-v-fdbf4940><li class="copyright-item" data-v-fdbf4940><a href="/zh/2020/12/13/test/.html" class="nav-link" data-v-fdbf4940>caiyuchao © 2019-present</a></li></ul></div></footer></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.5e01ec81.js" defer></script><script src="/assets/js/8.46b4a70d.js" defer></script><script src="/assets/js/3.4013fd1f.js" defer></script><script src="/assets/js/7.ee391bd7.js" defer></script>
+  </body>
+</html>

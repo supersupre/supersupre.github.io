@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Create json-server with multiple files | 超哥的个人博客</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="With json-server, Frontend engineers can develop without relying on Backend. But it's not handy to maintain it due to its single .json file entry. Why not splitting each API into separate files.">
+    
+    <link rel="preload" href="/assets/css/0.styles.db139f22.css" as="style"><link rel="preload" href="/assets/js/app.5e01ec81.js" as="script"><link rel="preload" href="/assets/js/8.46b4a70d.js" as="script"><link rel="preload" href="/assets/js/18.7c0a5126.js" as="script"><link rel="preload" href="/assets/js/19.20bc506a.js" as="script"><link rel="prefetch" href="/assets/js/10.35d669ec.js"><link rel="prefetch" href="/assets/js/11.ff02f680.js"><link rel="prefetch" href="/assets/js/12.bcbe4afb.js"><link rel="prefetch" href="/assets/js/13.df830664.js"><link rel="prefetch" href="/assets/js/14.b96f69c3.js"><link rel="prefetch" href="/assets/js/15.6d769794.js"><link rel="prefetch" href="/assets/js/16.d8eabf7b.js"><link rel="prefetch" href="/assets/js/17.809e07fe.js"><link rel="prefetch" href="/assets/js/20.018b849d.js"><link rel="prefetch" href="/assets/js/21.5f5caae3.js"><link rel="prefetch" href="/assets/js/22.54cc0433.js"><link rel="prefetch" href="/assets/js/23.f676f562.js"><link rel="prefetch" href="/assets/js/24.7f3668a9.js"><link rel="prefetch" href="/assets/js/25.b3943d8f.js"><link rel="prefetch" href="/assets/js/3.4013fd1f.js"><link rel="prefetch" href="/assets/js/4.558b27d0.js"><link rel="prefetch" href="/assets/js/5.8dc51427.js"><link rel="prefetch" href="/assets/js/6.033b1b9c.js"><link rel="prefetch" href="/assets/js/7.ee391bd7.js"><link rel="prefetch" href="/assets/js/9.62902d60.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.7d488c9c.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.db139f22.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-blog__global-layout"><section id="header-wrapper"><header id="header"><div class="header-wrapper"><div class="title"><a href="/" class="nav-link home-link">超哥的个人博客 </a></div> <div class="header-right-wrap"><ul class="nav"><li class="nav-item"><a href="/" class="nav-link">博客</a></li><li class="nav-item"><a href="/tag/" class="nav-link">标签</a></li></ul> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></div></header></section> <div id="mobile-header"><div class="mobile-header-bar"><div class="mobile-header-title"><a href="/" class="nav-link mobile-home-link">超哥的个人博客 </a> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div> <div class="mobile-menu-wrapper"><hr class="menu-divider"> <ul class="mobile-nav"><li class="mobile-nav-item"><a href="/" class="nav-link">博客</a></li><li class="mobile-nav-item"><a href="/tag/" class="nav-link">标签</a></li> <li class="mobile-nav-item"><!----></li></ul></div></div></div> <div class="content-wrapper"><div><div class="content__default"><p><a href="/zh/2019/07/21/create-json-server-with-multiple-files/">繁體中文</a> | English</p> <h2 id="intro"><a href="#intro" class="header-anchor">#</a> Intro</h2> <p><a href="https://github.com/billyyyyy3320/json-server-mulitple-files-sample" target="_blank" rel="noopener noreferrer">You can find a template here.<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>I'm going to share how I work with <code>json-server</code>, but perhaps there's another way you work more comfortable.</p> <h3 id="what-is-json-server"><a href="#what-is-json-server" class="header-anchor">#</a> What is <code>json-server</code>?</h3> <p>First, let's take a look at <a href="https://github.com/typicode/json-server#getting-started" target="_blank" rel="noopener noreferrer">json-server#getting-started<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> :</p> <p>Create a <code>db.json</code> file with some data</p> <div class="language- extra-class"><pre class="language-text"><code>{
+  &quot;posts&quot;: [
+    { &quot;id&quot;: 1, &quot;title&quot;: &quot;json-server&quot;, &quot;author&quot;: &quot;typicode&quot; }
+  ],
+  &quot;comments&quot;: [
+    { &quot;id&quot;: 1, &quot;body&quot;: &quot;some comment&quot;, &quot;postId&quot;: 1 }
+  ],
+  &quot;profile&quot;: { &quot;name&quot;: &quot;typicode&quot; }
+}
+</code></pre></div><p>Start JSON Server</p> <div class="language- extra-class"><pre class="language-text"><code>json-server --watch db.json
+</code></pre></div><p>Now if you go to http://localhost:3000/posts/1, you'll get</p> <div class="language- extra-class"><pre class="language-text"><code>{ &quot;id&quot;: 1, &quot;title&quot;: &quot;json-server&quot;, &quot;author&quot;: &quot;typicode&quot; }
+</code></pre></div><p>It's pretty simple. However, the data might be more complicated in real world, so I'm going to create a file for each api.</p> <h2 id="starting"><a href="#starting" class="header-anchor">#</a> Starting</h2> <h3 id="structure-with-multiple-files"><a href="#structure-with-multiple-files" class="header-anchor">#</a> Structure with multiple files</h3> <p>Create a new folder <code>mock</code>, and add a script in <code>package.json</code>:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token property">&quot;mock&quot;</span><span class="token operator">:</span> <span class="token string">&quot;json-server --watch ./mock/db.js&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>First, transform <code>db.json</code> into <code>db.js</code>:</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code><span class="token comment">// db.js</span>
+<span class="token comment">// Should export a function which return an object</span>
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+  posts<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> title<span class="token operator">:</span> <span class="token string">&quot;json-server&quot;</span><span class="token punctuation">,</span> author<span class="token operator">:</span> <span class="token string">&quot;typicode&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  comments<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> body<span class="token operator">:</span> <span class="token string">&quot;some comment&quot;</span><span class="token punctuation">,</span> postId<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  profile<span class="token operator">:</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">&quot;typicode&quot;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>Since it's no longer a json file, you can load data from separate files:</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code><span class="token comment">// db.js</span>
+<span class="token keyword">const</span> posts <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;./posts&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> comments <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;./comments&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> profile <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;./profile&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+  posts<span class="token punctuation">,</span>
+  comments<span class="token punctuation">,</span>
+  profile
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>Create corresponding files, for example:</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code><span class="token comment">// posts.js</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> title<span class="token operator">:</span> <span class="token string">&quot;json-server&quot;</span><span class="token punctuation">,</span> author<span class="token operator">:</span> <span class="token string">&quot;typicode&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="import-files-automatically"><a href="#import-files-automatically" class="header-anchor">#</a> Import files automatically</h3> <p>It's not very handy that you have to import the file whenever you create one.</p> <p>Let's leverage <a href="https://github.com/isaacs/node-glob" target="_blank" rel="noopener noreferrer">glob<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> to get file names so that we can load files dynamically:</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code><span class="token comment">// db.js</span>
+<span class="token keyword">const</span> Path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> glob <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;glob&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> apiFiles <span class="token operator">=</span> glob<span class="token punctuation">.</span><span class="token function">sync</span><span class="token punctuation">(</span>Path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./&quot;</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;/**/*.js&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  nodir<span class="token operator">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// apiFiles will be :</span>
+<span class="token comment">// [ '/Users/billy/Desktop/json-server-multiple-files-sample/mock/comments.js',</span>
+<span class="token comment">//   '/Users/billy/Desktop/json-server-multiple-files-sample/mock/db.js',</span>
+<span class="token comment">//   '/Users/billy/Desktop/json-server-multiple-files-sample/mock/posts.js',</span>
+<span class="token comment">//   '/Users/billy/Desktop/json-server-multiple-files-sample/mock/profile.js' ]</span>
+
+<span class="token keyword">let</span> data <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+apiFiles<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">filePath</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> api <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> <span class="token punctuation">[</span><span class="token punctuation">,</span> url<span class="token punctuation">]</span> <span class="token operator">=</span> filePath<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">&quot;mock/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// e.g. comments.js</span>
+  url <span class="token operator">=</span> url<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> url<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">3</span><span class="token punctuation">)</span>  <span class="token comment">// remove .js &gt;&gt; comments</span>
+  data<span class="token punctuation">[</span>url<span class="token punctuation">]</span> <span class="token operator">=</span> api<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// data will be :</span>
+<span class="token comment">// { 'comments': [ { id: 1, body: 'some comment', postId: 1 } ],</span>
+<span class="token comment">//   'db': {},</span>
+<span class="token comment">//   'posts': [ { id: 1, title: 'json-server', author: 'typicode' } ],</span>
+<span class="token comment">//   'profile': { name: 'typicode' } }</span>
+
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> data<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>But we don't need to load <code>db.js</code> to be a API, right?<br>
+Rename <code>db.js &gt; _db.js</code> and add a rule to prevent all files with <code>_</code> prefix from transforming API routes:</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code><span class="token comment">// db.js</span>
+<span class="token comment">// ...</span>
+<span class="token keyword">const</span> apiFiles <span class="token operator">=</span> glob<span class="token punctuation">.</span><span class="token function">sync</span><span class="token punctuation">(</span>Path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./&quot;</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;/**/[!_]*.js&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+<span class="token comment">// ...</span>
+</code></pre></div><h3 id="monitor-multiple-files"><a href="#monitor-multiple-files" class="header-anchor">#</a> Monitor multiple files</h3> <p>Since json-server will automatically restart only when <code>_db.js</code> is changed, I have to do it whenever adding a API or modify data.
+<a href="https://github.com/typicode/json-server/issues/434#issuecomment-273498639" target="_blank" rel="noopener noreferrer">Solution<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>:</p> <div class="language- extra-class"><pre class="language-text"><code>yarn add -D nodemon
+</code></pre></div><div class="language-json extra-class"><pre class="language-json"><code><span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token property">&quot;mock&quot;</span><span class="token operator">:</span> <span class="token string">&quot;nodemon --watch mock --exec 'json-server ./mock/_db.js'&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="better-router"><a href="#better-router" class="header-anchor">#</a> Better router</h3> <p>What if APIs become more complicated:</p> <div class="language- extra-class"><pre class="language-text"><code>/blog/posts
+/blog/comments
+/blog/profile
+/documents/query
+</code></pre></div><p>I wish I can have the mock folder structure like below:</p> <div class="language- extra-class"><pre class="language-text"><code>├── _db.js
+├── blog
+│   ├── comments.js
+│   ├── posts.js
+│   └── profile.js
+└── documents
+    └── query.js
+</code></pre></div><p>Modify rules of <code>_db.js</code>:</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code><span class="token comment">// db.js</span>
+<span class="token keyword">const</span> Path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> glob <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'glob'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./config.json'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> apiFiles <span class="token operator">=</span> glob<span class="token punctuation">.</span><span class="token function">sync</span><span class="token punctuation">(</span>
+  Path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'./'</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'/**/[!_]*.js'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    nodir<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> data <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+
+apiFiles<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">filePath</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> api <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> <span class="token punctuation">[</span><span class="token punctuation">,</span> url<span class="token punctuation">]</span> <span class="token operator">=</span> filePath<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'mock/'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  url <span class="token operator">=</span> url<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> url<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  data<span class="token punctuation">[</span>url<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\/</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">'-'</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> api<span class="token punctuation">;</span> <span class="token comment">// the only change</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// data will be something like:</span>
+<span class="token comment">// { 'blog-comments': [ { id: 1, body: 'some comment', postId: 1 } ],</span>
+<span class="token comment">//   'blog-posts': [ { id: 1, title: 'json-server', author: 'tydpicode' } ],</span>
+<span class="token comment">//   'blog-profile': { name: 'typicode' },</span>
+<span class="token comment">//   'documents-query': { data: 123 } }</span>
+
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> data<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>Create <code>config.json</code> and <code>router.json</code> files:
+（<a href="https://github.com/typicode/json-server#cli-usage" target="_blank" rel="noopener noreferrer">config usage<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a><a href="https://github.com/typicode/json-server#add-custom-routes" target="_blank" rel="noopener noreferrer">router usage<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>）</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token comment">// config.json</span>
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;port&quot;</span><span class="token operator">:</span> <span class="token number">9898</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;routes&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./mock/router.json&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language-json extra-class"><pre class="language-json"><code><span class="token comment">// router.json</span>
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;/*/*/*&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/$1-$2-$3&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;/*/*&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/$1-$2&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Now <code>/documents/query</code> will correspond to <code>/documents-query</code>.<br>
+If <code>/documents/query/something</code> is existed, it'll correspond to <code>/documents-query-something</code>. That's totally handle the folder structure.</p> <p>Last modified:</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code><span class="token comment">// _db.js</span>
+<span class="token keyword">const</span> Path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> glob <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;glob&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> apiFiles <span class="token operator">=</span> glob<span class="token punctuation">.</span><span class="token function">sync</span><span class="token punctuation">(</span>Path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./&quot;</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;/**/[!_]*.js&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  nodir<span class="token operator">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> data <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+apiFiles<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">filePath</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> api <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> <span class="token punctuation">[</span><span class="token punctuation">,</span> url<span class="token punctuation">]</span> <span class="token operator">=</span> filePath<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">&quot;mock/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  url <span class="token operator">=</span>
+    url<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>url<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">9</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">&quot;/index.js&quot;</span>
+      <span class="token operator">?</span> url<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> url<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">9</span><span class="token punctuation">)</span> <span class="token comment">// remove /index.js</span>
+      <span class="token operator">:</span> url<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> url<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// remove .js</span>
+  data<span class="token punctuation">[</span>url<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\/</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">&quot;-&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> api<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> data<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>Now if there's a API route <code>/documents</code>, I can restructure</p> <div class="language- extra-class"><pre class="language-text"><code>├── _db.js
+├── blog
+│   ├── comments.js
+│   ├── posts.js
+│   └── profile.js
+├── config.json
+├── documents
+│   └── query.js
+├── documents.js
+└── router.json
+</code></pre></div><p>to be something like：</p> <div class="language- extra-class"><pre class="language-text"><code>├── _db.js
+├── blog
+│   ├── comments.js
+│   ├── posts.js
+│   └── profile.js
+├── config.json
+├── documents
+│   ├── index.js
+│   └── query.js
+└── router.json
+</code></pre></div><h2 id="others"><a href="#others" class="header-anchor">#</a> Others</h2> <h3 id="decode-chinese-characters"><a href="#decode-chinese-characters" class="header-anchor">#</a> Decode Chinese characters</h3> <p>If there's a API route <code>documents/基本</code>, I won't be able to visit it.
+<code>基本</code>will be encode to be<code>%E5%9F%BA%E6%9C%AC</code>. Since we know the encoded string is consisted of the percent character &quot;%&quot; followed by two hexadecimal digits, I can create a middleware to handle it. Use prefix <code>_</code> which I've reserved. Decode url when the url contains the encoded string:</p> <div class="language- extra-class"><pre class="language-text"><code>├── _db.js
+├── blog
+│   ├── comments.js
+│   ├── posts.js
+│   └── profile.js
+├── config.json
+├── documents
+│   ├── index.js
+│   ├── query.js
+│   └── 基本.js
+├── middlewares
+│   ├── _decodeChinese.js
+└── router.json
+</code></pre></div><div class="language-JavaScript extra-class"><pre class="language-javascript"><code><span class="token comment">// _decodeChinese.js</span>
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> regex <span class="token operator">=</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">%(\d|[A-Z]){2}</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> isMatch <span class="token operator">=</span> regex<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>req<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>isMatch<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    req<span class="token punctuation">.</span>url <span class="token operator">=</span> <span class="token function">decodeURI</span><span class="token punctuation">(</span>req<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-json extra-class"><pre class="language-json"><code><span class="token comment">// config.json</span>
+<span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  <span class="token property">&quot;middlewares&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./mock/middlewares/_decodeChinese.js&quot;</span><span class="token punctuation">]</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="get-data-using-post"><a href="#get-data-using-post" class="header-anchor">#</a> Get data using POST</h3> <p>Sometimes People have to get data by POST instead of GET, but <code>custom route</code> of <code>json-server</code> will always be GET.
+<a href="https://github.com/typicode/json-server/issues/453#issuecomment-343048811" target="_blank" rel="noopener noreferrer">Solution<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a><br>
+Again <code>middleware</code>. To detect whenever the method is POST, transform it into GET.</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code><span class="token comment">// _postAsGet.js</span>
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>req<span class="token punctuation">.</span>method <span class="token operator">===</span> <span class="token string">'POST'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Converts POST to GET and move payload to query params</span>
+    <span class="token comment">// This way it will make JSON Server that it's GET request</span>
+    req<span class="token punctuation">.</span>method <span class="token operator">=</span> <span class="token string">'GET'</span><span class="token punctuation">;</span>
+    req<span class="token punctuation">.</span>query <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// Continue to JSON Server router</span>
+  <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-json extra-class"><pre class="language-json"><code><span class="token comment">// config.json</span>
+<span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  <span class="token property">&quot;middlewares&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./mock/middlewares/_postAsGet.js&quot;</span><span class="token punctuation">]</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="run-app-and-mock-server-at-the-same-time-in-one-terminal"><a href="#run-app-and-mock-server-at-the-same-time-in-one-terminal" class="header-anchor">#</a> Run App and mock server at the same time in one terminal</h3> <p>It's kind of annoyed to open two terminal to run each server.
+Actually, I can just run <code>yarn mock &amp; yarn start</code>. But how do I know where logs come from ?<br>
+I leverage <a href="https://github.com/kimmobrunfeldt/concurrently" target="_blank" rel="noopener noreferrer">Concurrently<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> to solve this problem:</p> <div class="language- extra-class"><pre class="language-text"><code>yarn add -D concurrently
+</code></pre></div><div class="language-json extra-class"><pre class="language-json"><code><span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token property">&quot;dev&quot;</span><span class="token operator">:</span> <span class="token string">&quot;concurrently \&quot;yarn:start\&quot; \&quot;yarn:mock\&quot;&quot;</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre></div><hr> <p>End.</p></div></div></div> <footer class="footer" data-v-fdbf4940><div class="footer-left-wrap" data-v-fdbf4940><ul class="contact" data-v-fdbf4940><li class="contact-item" data-v-fdbf4940><a href="http://yaufo.com" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-fdbf4940><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe" data-v-fdbf4940><circle cx="12" cy="12" r="10" data-v-fdbf4940></circle><line x1="2" y1="12" x2="22" y2="12" data-v-fdbf4940></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" data-v-fdbf4940></path></svg>
+          
+        </a></li></ul></div> <div class="footer-right-wrap" data-v-fdbf4940><ul class="copyright" data-v-fdbf4940><li class="copyright-item" data-v-fdbf4940><a href="/_en/.html" class="nav-link" data-v-fdbf4940>caiyuchao © 2019-present</a></li></ul></div></footer></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.5e01ec81.js" defer></script><script src="/assets/js/8.46b4a70d.js" defer></script><script src="/assets/js/18.7c0a5126.js" defer></script><script src="/assets/js/19.20bc506a.js" defer></script>
+  </body>
+</html>
